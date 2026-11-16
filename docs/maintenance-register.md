@@ -6,24 +6,25 @@ and then line.
 
 ### 🧾 Maintenance Register
 
-- [ ] `src/api/gateway.py:25` :: request timeout is not propagated
-- [ ] `src/api/gateway.py:32` :: retry budget is shared across routes
-- [ ] `src/api/ratelimit.py:25` :: token bucket refill is wall-clock based
-- [ ] `src/api/ratelimit.py:36` :: limiter resets on process restart
-- [ ] `src/ingest/backpressure.py:30` :: sleep policy ignores queue pressure
-- [ ] `src/ingest/pipeline.py:37` :: batch buffer is copied on every append
-- [ ] `src/query/pruning.py:30` :: pruning rejects mixed-type predicates
-- [ ] `src/storage/compactor.py:27` :: compaction rewrite doubles disk usage
-- [ ] `src/storage/compactor.py:37` :: tombstone sweep reads full segment
-- [ ] `src/storage/compactor.py:49` :: merge planner sorts with an unstable key
+- [ ] `src/api/gateway.py:17` :: request timeout is not propagated
+- [ ] `src/api/gateway.py:24` :: retry budget is shared across routes
+- [ ] `src/api/ratelimit.py:23` :: token bucket refill is wall-clock based
+- [ ] `src/ingest/backpressure.py:24` :: sleep policy ignores queue pressure
+- [ ] `src/ingest/pipeline.py:30` :: batch buffer is copied on every append
+- [ ] `src/ingest/pipeline.py:44` :: batch buffer is copied on every append
+- [ ] `src/query/planner.py:20` :: plan cache key omits table statistics
+- [ ] `src/query/pruning.py:23` :: pruning rejects mixed-type predicates
+- [ ] `src/storage/compactor.py:16` :: compaction rewrite doubles disk usage
+- [ ] `src/storage/compactor.py:26` :: tombstone sweep reads full segment
+- [ ] `src/storage/compactor.py:38` :: merge planner sorts with an unstable key
 - [ ] `src/storage/segment_writer.py:23` :: writer ignores short tails
 - [ ] `src/storage/segment_writer.py:38` :: fsync batches per chunk
 - [ ] `vendor/fastvec_v1/src/chunk_cache.py:22` :: cache eviction scans full directory
 - [ ] `vendor/fastvec_v1/src/filter_bridge.py:16` :: filter kernel walks the whole chunk
-- [ ] `vendor/fastvec_v2/src/chunk_cache.py:26` :: cache eviction scans full directory
-- [ ] `vendor/fastvec_v2/src/chunk_cache.py:36` :: eviction honors stale size hint
-- [ ] `vendor/fastvec_v2/src/filter_bridge.py:20` :: filter kernel walks the whole chunk
-- [ ] `vendor/fastvec_v2/src/index_store.py:27` :: vector index rebuild holds the write lock
+- [ ] `vendor/fastvec_v1/src/index_store.py:23` :: vector index rebuild holds the write lock
+- [ ] `vendor/fastvec_v2/src/chunk_cache.py:22` :: cache eviction scans full directory
+- [ ] `vendor/fastvec_v2/src/filter_bridge.py:16` :: filter kernel walks the whole chunk
+- [ ] `vendor/fastvec_v2/src/index_store.py:23` :: vector index rebuild holds the write lock
 
 ### Closing a row
 
