@@ -1,0 +1,7 @@
+Period,Module,Open Markers,Lines Reviewed,Committed Changes,Change Rate (%),Escaped Defect Rate (%),Budget Utilisation (%),Risk Flag
+2026-09,ingest,3,18420,1912,10.38,2.10,63.4,ROUTINE
+2026-09,query,2,12150,1284,10.57,1.72,58.2,ROUTINE
+2026-09,storage,5,14980,1530,10.21,1.38,65.1,ESCALATE
+2026-09,api,3,8640,822,9.51,0.94,71.5,ROUTINE
+2026-09,fastvec_v1,3,11020,1128,10.23,1.56,52.6,ROUTINE
+2026-09,fastvec_v2,3,11860,1204,10.15,1.49,45.8,ROUTINE
