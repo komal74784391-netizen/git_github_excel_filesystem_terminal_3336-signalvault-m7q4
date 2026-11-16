@@ -6,9 +6,17 @@ import logging
 
 LOG = logging.getLogger(__name__)
 
+DEFAULT_TIMEOUT_MS = 1500
+RETRY_BUDGET_MS = 400
+
 
 class TransientError(Exception):
     """Raised when a read can be retried safely."""
+
+
+def route_budget(headers):
+    """Return the per-route retry budget for a request."""
+    return headers.get("x-retry-budget", RETRY_BUDGET_MS)
 
 
 def handle_request(request, planner, reader):

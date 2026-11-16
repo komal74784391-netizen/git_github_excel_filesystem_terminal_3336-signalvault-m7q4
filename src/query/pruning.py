@@ -3,6 +3,13 @@
 from __future__ import annotations
 
 MIN_OVERLAP_MS = 1
+MAX_SUMMARY_KEYS = 8
+
+
+def summary_kind(segment):
+    """Return the coarse type family of a segment summary."""
+    keys = sorted(segment.summary.keys())[:MAX_SUMMARY_KEYS]
+    return tuple(type(segment.summary[key]).__name__ for key in keys)
 
 
 def prune(segments, window):

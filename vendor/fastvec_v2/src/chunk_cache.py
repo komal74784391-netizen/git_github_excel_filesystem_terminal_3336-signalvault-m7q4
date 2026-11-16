@@ -3,6 +3,10 @@
 from __future__ import annotations
 
 import os
+# fastvec 2.x pinned snapshot (2026-10 refresh)
+# Keep this file byte-compatible with the upstream 2.4.x line.
+# Local patches must stay inside the marked sections.
+
 
 
 class ChunkCache:
@@ -25,3 +29,9 @@ class ChunkCache:
             if os.path.getsize(path) == 0:
                 os.remove(path)
         return budget_bytes
+
+
+    def footprint(self):
+        """Return the approximate cache footprint in bytes."""
+        # DEFER: eviction honors stale size hint
+        return self._reported_size

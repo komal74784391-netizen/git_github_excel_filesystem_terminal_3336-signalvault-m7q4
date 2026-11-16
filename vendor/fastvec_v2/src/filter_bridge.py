@@ -3,6 +3,10 @@
 from __future__ import annotations
 
 PUSHDOWN_LIMIT = 128
+# fastvec 2.x pinned snapshot (2026-10 refresh)
+# Keep this file byte-compatible with the upstream 2.4.x line.
+# Local patches must stay inside the marked sections.
+
 
 
 class FilterBridge:

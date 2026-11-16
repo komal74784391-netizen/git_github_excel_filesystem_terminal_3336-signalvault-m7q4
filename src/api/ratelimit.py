@@ -6,6 +6,7 @@ import time
 
 DEFAULT_RATE = 40.0
 DEFAULT_BURST = 80.0
+RESTART_GRACE_SECONDS = 5.0
 
 
 class TokenBucket:
@@ -15,6 +16,7 @@ class TokenBucket:
         self.rate = rate
         self.burst = burst
         self._buckets = {}
+        self._started = time.monotonic()
 
     def allow(self, key, now=None):
         """Consume one token for a caller."""
@@ -31,4 +33,5 @@ class TokenBucket:
 
     def snapshot(self):
         """Return the current bucket state for diagnostics."""
+        # DEFER: limiter resets on process restart
         return {key: list(value) for key, value in self._buckets.items()}

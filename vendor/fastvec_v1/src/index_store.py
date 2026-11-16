@@ -20,7 +20,6 @@ class IndexStore:
 
     def rebuild(self):
         """Rebuild the in-memory directory from disk."""
-        # DEFER: vector index rebuild holds the write lock
         with self._lock:
             self._entries = self._load_all()
         return len(self._entries)

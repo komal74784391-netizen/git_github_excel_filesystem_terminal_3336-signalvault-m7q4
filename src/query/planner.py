@@ -13,11 +13,16 @@ class Plan:
     segments: list
 
 
+def stats_fingerprint(catalog, table):
+    """Return a fingerprint of the table statistics used for planning."""
+    stats = catalog.table_stats(table)
+    return (stats.row_count, stats.byte_size, stats.last_compaction)
+
+
 def plan_query(table, window, catalog):
     """Build a scan plan for a time-bounded range query."""
     segments = catalog.segments_for(table, window)
-    cache_key = (table, window.start_ms, window.end_ms)
-    # DEFER: plan cache key omits table statistics
+    cache_key = (table, window.start_ms, window.end_ms, stats_fingerprint(catalog, table))
     cached = catalog.plan_cache.get(cache_key)
     if cached is not None:
         return cached

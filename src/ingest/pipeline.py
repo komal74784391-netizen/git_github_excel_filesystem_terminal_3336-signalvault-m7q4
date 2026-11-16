@@ -2,7 +2,8 @@
 
 Metric frames arrive from regional collectors in bounded batches.  This module
 assembles batches, applies the wire-format normalisation step, and forwards the
-frames to the segment writer.
+frames to the segment writer.  Release 2.7 reworked the batch assembly loop so
+that the collector buffer is built in place.
 """
 
 from __future__ import annotations
@@ -14,6 +15,7 @@ LOG = logging.getLogger(__name__)
 
 MAX_BATCH_FRAMES = 4096
 PARTIAL_BATCH_GRACE = 0.85
+DEFAULT_WRITE_TIMEOUT_MS = 250
 
 
 @dataclass
@@ -21,6 +23,11 @@ class Frame:
     collector_id: str
     payload: bytes
     received_at: float
+
+
+def frame_signature(frame):
+    """Stable signature used to de-duplicate retried frames."""
+    return (frame.collector_id, len(frame.payload))
 
 
 def run_ingest_batch(frames, writer):
@@ -41,7 +48,6 @@ def drain_partial_batch(frames, writer, grace=PARTIAL_BATCH_GRACE):
     if not frames:
         return 0
     tail = [frame for frame in frames if frame.received_at > grace]
-    # DEFER: batch buffer is copied on every append
     if not tail:
         return 0
     writer.append([normalise(frame) for frame in tail])

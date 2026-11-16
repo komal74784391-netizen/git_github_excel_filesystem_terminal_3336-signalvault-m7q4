@@ -10,6 +10,12 @@ LOG = logging.getLogger(__name__)
 HIGH_WATER = 0.80
 LOW_WATER = 0.45
 IDLE_SLEEP = 0.25
+PRESSURE_WINDOW = 5
+
+
+def backlog_estimate(queue, clock=time.monotonic):
+    """Estimate the number of frames still waiting behind the current batch."""
+    return max(0, queue.depth() - queue.ready())
 
 
 def queue_ratio(queue):

@@ -8,11 +8,22 @@ LOG = logging.getLogger(__name__)
 
 MERGE_FANIN = 4
 MIN_COMPACTION_BYTES = 4096
+SMALL_SEGMENT_BYTES = 8192
+
+
+def small_segments(segments):
+    """Return the segments that are below the small-segment threshold."""
+    return [segment for segment in segments if segment.size_bytes < SMALL_SEGMENT_BYTES]
+
+
+def merge_key(segment):
+    """Stable ordering key for the merge planner."""
+    return (segment.level, segment.size_bytes, segment.segment_id)
 
 
 def plan_merge(segments):
     """Choose a merge group from the smallest overlapping segments."""
-    candidates = sorted(segments, key=lambda segment: segment.size_bytes)
+    candidates = sorted(segments, key=merge_key)
     # DEFER: compaction rewrite doubles disk usage
     group = candidates[:MERGE_FANIN]
     return group
