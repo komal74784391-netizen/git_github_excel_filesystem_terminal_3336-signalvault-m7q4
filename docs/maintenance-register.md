@@ -20,9 +20,7 @@ and then line.
 - [ ] `src/storage/segment_writer.py:38` :: fsync batches per chunk
 - [ ] `vendor/fastvec_v1/src/chunk_cache.py:22` :: cache eviction scans full directory
 - [ ] `vendor/fastvec_v1/src/filter_bridge.py:16` :: filter kernel walks the whole chunk
-- [ ] `vendor/fastvec_v2/src/chunk_cache.py:26` :: cache eviction scans full directory
 - [ ] `vendor/fastvec_v2/src/chunk_cache.py:36` :: eviction honors stale size hint
-- [ ] `vendor/fastvec_v2/src/filter_bridge.py:20` :: filter kernel walks the whole chunk
 - [ ] `vendor/fastvec_v2/src/index_store.py:27` :: vector index rebuild holds the write lock
 
 ### Closing a row
